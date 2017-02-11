@@ -36,9 +36,11 @@ class Content extends React.Component{
 				else
 					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item';
 			}
-			else
+			else 
 			{
-				if(this.props.option==='a'&&index==='a')
+				if(this.props.correct_option===index)
+					return 	'ques_option is-clickable apply-mathjax js-ques-list-option-item is-correct';
+				else if(this.props.option==='a'&&index==='a')
 					return 	'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
 				else if(this.props.option==='b'&&index==='b')
 					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
@@ -54,6 +56,24 @@ class Content extends React.Component{
 	handleClick(index) {
 		let self=this;
 		self.props.handleClick(index);
+	}
+	displaysolution(index) {
+		let self = this;
+		if(this.props.correct_status!=null && this.props.correct_option===index)
+		{
+			return (
+				<div className="solution_text_container js-solution-text">
+	                <div className="solution_heading">Solution</div>
+	                <div className="js-solution-content">
+	                    <div className="testTool_qSolution_text solution_text">
+	                    <p>{self.props.question_solution}</p>
+						</div>
+	                </div>
+	        	</div>
+	        );
+		}
+		else
+			return null;
 	}
 
 	render(){
@@ -90,6 +110,7 @@ class Content extends React.Component{
 	                    		</div>
 	                    		<input type="checkbox" className="hide" name="choices" defaultValue={825133} />
 	                    		<div className="clr"></div>
+	                    		{this.displaysolution('a')}
 	                    		
                     
                   			</div>
@@ -109,6 +130,7 @@ class Content extends React.Component{
         					</div>
         					<input type="checkbox" className="hide" name="choices" defaultValue={825133} />
             				<div className="clr"></div>
+            				{this.displaysolution('b')}
             				
     					</div>
     					<div className={this.selectfun('c')} data-choice_id="<p><span style={{fontSize:18}}>Only (d)</span></p> " onClick={() => this.props.handleClick('c')} ><span className="ques_option_label fl">C</span>
@@ -126,6 +148,7 @@ class Content extends React.Component{
                       <div className="clr"></div>
                     </div><input type="checkbox" className="hide" name="choices" defaultValue={825133} />
                     <div className="clr"></div>
+                    {this.displaysolution('c')}
                     {/*<div className="solution_text_container js-solution-text">
                       <div className="solution_heading">Solution</div>
                       <div className="js-solution-content">
@@ -149,6 +172,7 @@ class Content extends React.Component{
                       <div className="clr"></div>
                     </div><input type="checkbox" className="hide" name="choices" defaultValue={825133} />
                     <div className="clr"></div>
+                    {this.displaysolution('d')}
                     
                   </div>
                 </div>

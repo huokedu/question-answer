@@ -16,6 +16,7 @@ class App extends Component {
             option: null,
             correct_option: 'a',
             correct_status: null,
+            question_solution: 'This is the solution of the question',
 
         };
         this.handleClick = this.handleClick.bind(this);
@@ -71,7 +72,11 @@ class App extends Component {
         <Sidebar />
         <Topbar />
         <Content 
-        handleClick={this.handleClick} option={this.state.option} correct_status={this.state.correct_status} />
+        handleClick={this.handleClick} 
+        option={this.state.option} 
+        correct_status={this.state.correct_status}
+        question_solution={this.state.question_solution}
+        correct_option={this.state.correct_option} />
         <Nav />
         <Bar 
         checkanswer={this.checkanswer} option={this.state.option} correct_status={this.state.correct_status} />
