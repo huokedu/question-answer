@@ -4,27 +4,56 @@ class Content extends React.Component{
 	constructor(props) {
 		super(props);
 	}
-	select(index){
-		if(this.props.option==null)
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item';
-		else if(this.props.option!=null&&index==='a')
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
-		else if(this.props.option!=null&&index==='b')
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
-		else if(this.props.option!=null&&index==='c')	
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
-		else if(this.props.option!=null&&index==='d')
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
+
+	selectfun(index) {
+		if(this.props.correct_status===null)
+		{
+			if(this.props.option===null)
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item';
+			else if(this.props.option==='a'&&index==='a')
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
+			else if(this.props.option==='b'&&index==='b')
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
+			else if(this.props.option==='c'&&index==='c')	
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
+			else if(this.props.option==='d'&&index==='d')
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected';
+			else
+				return 'ques_option is-clickable apply-mathjax js-ques-list-option-item';
+		}
 		else
-			return 'ques_option is-clickable apply-mathjax js-ques-list-option-item';
+		{
+			if(this.props.correct_status===true)
+			{
+				if(this.props.option==='a'&&index==='a')
+					return 	'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected  is-correct';
+				else if(this.props.option==='b'&&index==='b')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected  is-correct';
+				else if(this.props.option==='c'&&index==='c')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected  is-correct';
+				else if(this.props.option==='d'&&index==='d')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected  is-correct';
+				else
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item';
+			}
+			else
+			{
+				if(this.props.option==='a'&&index==='a')
+					return 	'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
+				else if(this.props.option==='b'&&index==='b')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
+				else if(this.props.option==='c'&&index==='c')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
+				else if(this.props.option==='d'&&index==='d')
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item is-selected is-wrong';
+				else
+					return  'ques_option is-clickable apply-mathjax js-ques-list-option-item';	
+			}
+		}
 	}
 	handleClick(index) {
 		let self=this;
-		this.props.handleClick(index);
-	}
-	handledClick(index) {
-		let self=this;
-		this.props.handledClick(index);
+		self.props.handleClick(index);
 	}
 
 	render(){
@@ -47,7 +76,7 @@ class Content extends React.Component{
 
                 					</div>
                 			<div>
-                  			<div className={this.select('a')} data-choice_id="<p><span style={{fontSize:18}}>(a), (b) and (d)</span></p> " onClick={this.handleClick('a')} onDoubleClick={this.handledClick('a')} ><span className="ques_option_label fl">A</span>
+                  			<div className={this.selectfun('a')} data-choice_id="<p><span style={{fontSize:18}}>(a), (b) and (d)</span></p> " onClick={() => this.props.handleClick('a')} ><span className="ques_option_label fl">A</span>
                     			<div className="ques_option_content">
                       				<div className="ques_option_content_text">
                         			<p>What is your Name??</p>
@@ -64,7 +93,7 @@ class Content extends React.Component{
 	                    		
                     
                   			</div>
-                  			<div className={this.select('b')} data-choice_id="<p><span style={{fontSize:18}}>(a) and (d)</span></p> " onClick={this.handleClick('b')} onDoubleClick={this.handledClick('b')} ><span className="ques_option_label fl">B</span>
+                  			<div className={this.selectfun('b')} data-choice_id="<p><span style={{fontSize:18}}>(a) and (d)</span></p> " onClick={() => this.props.handleClick('b')} ><span className="ques_option_label fl">B</span>
                     			<div className="ques_option_content">
                       				<div className="ques_option_content_text">
                         			<p>Ram</p>
@@ -82,7 +111,7 @@ class Content extends React.Component{
             				<div className="clr"></div>
             				
     					</div>
-    					<div className={this.select('c')} data-choice_id="<p><span style={{fontSize:18}}>Only (d)</span></p> " onClick={this.handleClick('c')} onDoubleClick={this.handledClick('c')}><span className="ques_option_label fl">C</span>
+    					<div className={this.selectfun('c')} data-choice_id="<p><span style={{fontSize:18}}>Only (d)</span></p> " onClick={() => this.props.handleClick('c')} ><span className="ques_option_label fl">C</span>
         					<div className="ques_option_content">
             					<div className="ques_option_content_text">
                 				<p>Shyam</p>
@@ -105,7 +134,7 @@ class Content extends React.Component{
                       </div>
                     </div>*/}
                   </div>
-                  <div className={this.select('d')} data-choice_id="<p><span style={{fontSize:18}}>(b), (c) and (d)</span></p> " onClick={this.handleClick('d')} onDoubleClick={this.handledClick('d')}><span className="ques_option_label fl">D</span>
+                  <div className={this.selectfun('d')} data-choice_id="<p><span style={{fontSize:18}}>(b), (c) and (d)</span></p> " onClick={() => this.props.handleClick('d')} ><span className="ques_option_label fl">D</span>
                     <div className="ques_option_content">
                       <div className="ques_option_content_text">
                         <p>Shubham</p>
@@ -127,9 +156,9 @@ class Content extends React.Component{
             </div>
           </div>
         </div>
-        <button style={{display: "none"}}>Test</button>
-        <br />
-        <button type="button" className="btn" style={{display: "none", marginTop: "5px", padding: "10px 30px"}} >NEXT</button>
+        
+        
+        
         </div>
 
     </div>

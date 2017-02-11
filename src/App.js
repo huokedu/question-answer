@@ -13,26 +13,57 @@ class App extends Component {
   constructor() {
         super();
         this.state = {
-            option: 'a'
+            option: null,
+            correct_option: 'a',
+            correct_status: null,
+
         };
         this.handleClick = this.handleClick.bind(this);
+        this.checkanswer = this.checkanswer.bind(this);
     }
     handleClick(index) {
-        
-        this.setState({
-            option: index
+        let self= this;
+        if(self.state.correct_status==null)
+        {
+          if(index===self.state.option)
+          {
+            self.setState({
+              option: null
+            });
+          }
+          else
+          {
+            self.setState({
+                option: index
+            });
+          }
+        }
 
-        });
-        console.log(this.state.option);
+        console.log(self.state.option);
     }
-    handledClick(index) {
-        this.setState({
-            option: null
-
-        });
-        console.log(this.state.option);
+    componentDidUpdate() {
+    console.log(this.state);
+  }
+  checkanswer() {
+    let self = this;
+    //console.log(self);
+    if(self.state.option===self.state.correct_option)
+    {
+      
+      self.setState({
+        correct_status: true
+      });
+      return true;
     }
-  
+    else
+    {
+      
+      self.setState({
+        correct_status: false
+      });
+      return false;
+    }
+  }
   render() {
     return (
       <div>
@@ -40,9 +71,10 @@ class App extends Component {
         <Sidebar />
         <Topbar />
         <Content 
-        handleClick={this.handleClick} handledClick={this.handledClick} option={this.state.option} />
+        handleClick={this.handleClick} option={this.state.option} correct_status={this.state.correct_status} />
         <Nav />
-        <Bar />
+        <Bar 
+        checkanswer={this.checkanswer} option={this.state.option} correct_status={this.state.correct_status} />
       </div>
     );
   }
