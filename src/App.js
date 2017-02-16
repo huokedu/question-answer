@@ -7,61 +7,74 @@ import Content from './components/content';
 import Nav from './components/nav';
 import Bar from './components/bar';
 import Topbar from './components/topbar';
-
+//import axios from 'axios';
 
 class App extends Component {
   constructor() {
         super();
+        // const url = `${ROOT_URL}&q=${city},us`;
+        // const request = axios.get(url);
         this.state = {
-            option: null,
-            correct_option: 'a',
-            correct_status: null,
-            question_solution: 'This is the solution of the question',
-
+            ques_data: {
+              id: 1,
+              sub_id: 1,
+              chap_id: 1,
+              std: 11,
+              ques_exp: 'What is your name??',
+              ques_ans1: 'Rohan',
+              ques_ans2: 'Sohan',
+              ques_ans3: 'Mohan',
+              ques_ans4: 'Shubham',
+              ques_ans: 'a',
+              ques_sol: 'This is the solution of the problem',
+              ques_level: 'Easy',
+              ques_imp: true,
+              ques_cat: 'allques',
+              user_email: 'shubhambansal17@hotmail.com',
+              ques_input: null,
+              correct_status: null,
+              chap_name: "Physical World",
+            }
         };
         this.handleClick = this.handleClick.bind(this);
         this.checkanswer = this.checkanswer.bind(this);
+
     }
     handleClick(index) {
         let self= this;
-        if(self.state.correct_status==null)
+        var ques_data = self.state.ques_data;
+        if(self.state.ques_data.correct_status==null)
         {
-          if(index===self.state.option)
+          if(index===self.state.ques_data.ques_input)
           {
-            self.setState({
-              option: null
-            });
+            ques_data.ques_input = null;
           }
           else
           {
-            self.setState({
-                option: index
-            });
+            ques_data.ques_input = index;
           }
         }
+        self.setState({ques_data: ques_data});
 
-        console.log(self.state.option);
+        console.log(self.state.ques_data.ques_input);
     }
     componentDidUpdate() {
     console.log(this.state);
   }
   checkanswer() {
     let self = this;
+    var ques_data = self.state.ques_data;
     //console.log(self);
-    if(self.state.option===self.state.correct_option)
+    if(self.state.ques_data.ques_input===self.state.ques_data.ques_ans)
     {
       
-      self.setState({
-        correct_status: true
-      });
+      ques_data.correct_status = true;
+      self.setState({ques_data: ques_data});
       return true;
     }
     else
     {
-      
-      self.setState({
-        correct_status: false
-      });
+      self.setState({ques_data: ques_data});
       return false;
     }
   }
@@ -70,16 +83,14 @@ class App extends Component {
       <div>
         <Logo />
         <Sidebar />
-        <Topbar />
+        <Topbar 
+        ques_data={this.state.ques_data} />
         <Content 
-        handleClick={this.handleClick} 
-        option={this.state.option} 
-        correct_status={this.state.correct_status}
-        question_solution={this.state.question_solution}
-        correct_option={this.state.correct_option} />
+        handleClick={this.handleClick}
+        ques_data={this.state.ques_data} />
         <Nav />
         <Bar 
-        checkanswer={this.checkanswer} option={this.state.option} correct_status={this.state.correct_status} />
+        checkanswer={this.checkanswer} ques_data={this.state.ques_data} />
       </div>
     );
   }

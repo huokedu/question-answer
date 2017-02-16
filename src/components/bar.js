@@ -7,15 +7,15 @@ class Bar extends React.Component {
 	}
 	submitstate() {
 		let self=this;
-		if(self.props.option===null||self.props.correct_status!=null)
+		if(self.props.ques_data.ques_input===null||self.props.ques_data.correct_status!==null)
 			return (<div className="testTool_btmBar_actionBtn testTool_btmBar_actionBtn_primary grey testTool_btmBar_actionBtn_primary-fullWidth js-primary-btn-bottom">Next</div>);
 		else
 			return (<div className="testTool_btmBar_actionBtn testTool_btmBar_actionBtn_primary testTool_btmBar_actionBtn_primary-fullWidth js-primary-btn-bottom" onClick={() => self.props.checkanswer()} >Submit</div>);
 	}
-	checkanswer() {
+	/*checkanswer() {
 		let self=this;
 		self.props.checkanswer();
-	}
+	}*/
 	render() {
 		return (
 			<div className="testTool_btmBar">

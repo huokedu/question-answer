@@ -1,7 +1,11 @@
 import React from 'react';
 
 class Topbar extends React.Component{
-	render(){
+	checkimp = (props) => {
+    if(this.props.ques_data.ques_imp===true)
+      return 'IMPORTANT';
+  }
+  render(){
 		return (
 			<div>
       <div className="testTool_topBar">
@@ -13,8 +17,8 @@ class Topbar extends React.Component{
               <span className="js-test-timer-minutes">1</span>
               51
               <span className="js-test-timer-seconds">59</span></div>
-          </div><button className="testTool_topBar_stateBtn -strk js-btn-finish-assessment difficulty-btn"> DIFFICULT </button><button className="testTool_topBar_stateBtn -strk js-btn-finish-assessment difficulty-btn"> IMPORTANT </button>
-          <h1 className="testTool_topBar_title"> 56 Biological classification 57 Practice</h1></div>
+          </div><button className="testTool_topBar_stateBtn -strk js-btn-finish-assessment difficulty-btn"> {this.props.ques_data.ques_level} </button><button className="testTool_topBar_stateBtn -strk js-btn-finish-assessment difficulty-btn"> {this.checkimp()} </button>
+          <h1 className="testTool_topBar_title"> {this.props.ques_data.chap_name}</h1></div>
       </div>
     </div>
 			);
